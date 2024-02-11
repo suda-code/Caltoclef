@@ -49,7 +49,7 @@ public class Butler {
             boolean debug = ButlerConfig.getInstance().whisperFormatDebug;
             String message = evt.message.getString();
             if (debug) {
-                Debug.logMessage("RECEIVED WHISPER: \"" + message + "\".");
+                Debug.logMessage("收到消息: \"" + message + "\".");
             }
             _mod.getButler().receiveMessage(message);
         });
@@ -63,7 +63,7 @@ public class Butler {
         if (result != null) {
             this.receiveWhisper(result.from, result.message);
         } else if (ButlerConfig.getInstance().whisperFormatDebug){
-            Debug.logMessage("    Not Parsing: MSG format not found.");
+            Debug.logMessage(" 未解析：未找到 MSG 格式.");
         }
     }
 
@@ -73,7 +73,7 @@ public class Butler {
         // Ignore messages from other bots.
         if (message.startsWith(BUTLER_MESSAGE_START)) {
             if (debug) {
-                Debug.logMessage("    Rejecting: MSG is detected to be sent from another bot.");
+                Debug.logMessage("拒绝：检测到 MSG 是从另一个机器人发送的.");
             }
             return;
         }
@@ -82,7 +82,7 @@ public class Butler {
             executeWhisper(username, message);
         } else {
             if (debug) {
-                Debug.logMessage("    Rejecting: User \"" + username + "\" is not authorized.");
+                Debug.logMessage("拒绝：用户 \"" + username + "\" 未授权.");
             }
             if (ButlerConfig.getInstance().sendAuthorizationResponse) {
                 sendWhisper(username, ButlerConfig.getInstance().failedAuthorizationResposne.replace("{from}", username), MessagePriority.UNAUTHORIZED);
@@ -103,7 +103,7 @@ public class Butler {
 
     public void onLogWarning(String message, MessagePriority priority) {
         if (_currentUser != null) {
-            sendWhisper("[WARNING:] " + message, priority);
+            sendWhisper("[警告:] " + message, priority);
         }
     }
 
@@ -124,17 +124,17 @@ public class Butler {
         _commandInstantRan = true;
         _commandFinished = false;
         _currentUser = username;
-        sendWhisper("Command Executing: " + message, MessagePriority.TIMELY);
+        sendWhisper("命令执行: " + message, MessagePriority.TIMELY);
         String prefix = ButlerConfig.getInstance().requirePrefixMsg ? _mod.getModSettings().getCommandPrefix() : "";
         AltoClef.getCommandExecutor().execute(prefix+message, () -> {
             // On finish
-            sendWhisper("Command Finished: " + message, MessagePriority.TIMELY);
+            sendWhisper("命令完成: " + message, MessagePriority.TIMELY);
             if (!_commandInstantRan) {
                 _currentUser = null;
             }
             _commandFinished = true;
         }, e -> {
-            sendWhisper("TASK FAILED: " + e.getMessage(), MessagePriority.ASAP);
+            sendWhisper("任务失败: " + e.getMessage(), MessagePriority.ASAP);
             e.printStackTrace();
             _currentUser = null;
             _commandInstantRan = false;
@@ -150,7 +150,7 @@ public class Butler {
         if (_currentUser != null) {
             sendWhisper(_currentUser, message, priority);
         } else {
-            Debug.logWarning("Failed to send butler message as there are no users present: " + message);
+            Debug.logWarning("由于没有用户在场，无法发送管家消息: " + message);
         }
     }
 
