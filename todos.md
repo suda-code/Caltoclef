@@ -1,7 +1,15 @@
-# TODO's: Long Term Future Features
+# TODO's：长期未来特征
+```text
+这个是原作者的计划，可能永远没法实现qwq
+```
+- 用户可自定义的智能任务。为资源提供关于如何获取资源的 json 可分配描述，系统会自动尝试以最快的方式获取它。
+- 给定任何原理图，收集所有资源并构建原理图，如果可能的话，最好从一个新的生存世界中构建.
+- 通过网络初始化和控制多个机器人。有点像 RTS 游戏。
+- 让这个机器人能够在无政府状态下生存
+- 所有成就，完全自主（不会很快发生，哈哈）
 
-- Smart tasks that are user customizable. Give resources json-assignable descriptions on how they CAN be obtained, and the system automatically tries to obtain it in the fastest way.
-- Given any schematic, Collect ALL resources and BUILD the schematic, ideally from a fresh survival world if possible.
-- Initialize and control multiple bots over a network. Kind of like an RTS game.
-- Make this bot able to survive anarchy
-- All acheivements, fully autonomous (not happening any time soon lol)
+# TODO's - Caltoclef
+- 支持自动制作原理图
+- 增加更多可获取的物品
+- 支持1.21
+- 兼容Forge（更不会很快发生，哈哈）
