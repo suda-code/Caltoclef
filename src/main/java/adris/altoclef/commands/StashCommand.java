@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 public class StashCommand extends Command {
     public StashCommand() throws CommandException {
         // stash <stash_x> <stash_y> <stash_z> <stash_radius> [item list]
-        super("stash", "Store an item in a chest/container stash. Will deposit ALL non-equipped items if item list is empty.",
+        super("stash", "将物品存放在箱子/容器中。如果物品清单为空，将存放所有未配备的物品。",
                 new Arg(Integer.class, "x_start"),
                 new Arg(Integer.class, "y_start"),
                 new Arg(Integer.class, "z_start"),

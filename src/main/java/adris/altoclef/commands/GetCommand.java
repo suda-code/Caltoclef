@@ -10,19 +10,19 @@ import adris.altoclef.util.ItemTarget;
 public class GetCommand extends Command {
 
     public GetCommand() throws CommandException {
-        super("get", "Get an item/resource",
-                new Arg(ItemList.class, "items"));
+        super("get", "获取物品或资源",
+                new Arg(ItemList.class, "物品"));
     }
 
     private static void OnResourceDoesNotExist(AltoClef mod, String resource) {
-        mod.log("\"" + resource + "\" is not a catalogued resource. Can't get it yet, sorry! If it's a generic block try using baritone.", MessagePriority.OPTIONAL);
-        mod.log("Use @list to get a list of available resources.", MessagePriority.OPTIONAL);
+        mod.log("\"" + resource + "\" 不在AltoClef的资源库中，如果这是一个方块，请尝试 Baritone", MessagePriority.OPTIONAL);
+        mod.log("使用 @list 获取可以用的资源", MessagePriority.OPTIONAL);
     }
 
     private void GetItems(AltoClef mod, ItemTarget... items) {
         Task targetTask;
         if (items == null || items.length == 0) {
-            mod.log("You must specify at least one item!");
+            mod.log("你好歹填一个资源啊");
             finish();
             return;
         }

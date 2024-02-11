@@ -11,7 +11,7 @@ import net.minecraft.client.MinecraftClient;
 public class SetGammaCommand extends Command {
 
     public SetGammaCommand() throws CommandException {
-        super("gamma", "sets the brightness to a value", new Arg(Double.class, "gamma", 1.0, 0));
+        super("gamma", "设置Gamma值", new Arg(Double.class, "gamma", 1.0, 0));
     }
 
     @Override

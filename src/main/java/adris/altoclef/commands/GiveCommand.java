@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 
 public class GiveCommand extends Command {
     public GiveCommand() throws CommandException {
-        super("give", "Collects an item and gives it to you or someone else", new Arg(String.class, "username", null, 2), new Arg(String.class, "item"), new Arg(Integer.class, "count", 1, 1));
+        super("give", "收集物品并将其交给您或他人", new Arg(String.class, "玩家名", null, 2), new Arg(String.class, "item"), new Arg(Integer.class, "count", 1, 1));
     }
 
     @Override
@@ -24,7 +24,7 @@ public class GiveCommand extends Command {
             if (mod.getButler().hasCurrentUser()) {
                 username = mod.getButler().getCurrentUser();
             } else {
-                mod.logWarning("No butler user currently present. Running this command with no user argument can ONLY be done via butler.");
+                mod.logWarning("目前没有管家用户。只有通过BT才能在没有用户参数的情况下运行此命令.");
                 finish();
                 return;
             }

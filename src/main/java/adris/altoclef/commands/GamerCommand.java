@@ -7,7 +7,7 @@ import adris.altoclef.tasks.speedrun.BeatMinecraft2Task;
 
 public class GamerCommand extends Command {
     public GamerCommand() {
-        super("gamer", "Beats the game");
+        super("gamer", "通关游戏!");
     }
 
     @Override

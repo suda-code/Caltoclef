@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class EquipCommand extends Command {
     public EquipCommand() throws CommandException {
-        super("equip", "Equips armor", new Arg(ItemList.class, "[armors]"));
+        super("equip", "穿甲 (没有自动获得)", new Arg(ItemList.class, "[盔甲 (可多个)]"));
     }
 
     @Override

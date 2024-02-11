@@ -9,7 +9,7 @@ import java.util.List;
 
 public class StatusCommand extends Command {
     public StatusCommand() {
-        super("status", "Get status of currently executing command");
+        super("status", "获取当前正在执行的命令的状态");
     }
 
     @Override

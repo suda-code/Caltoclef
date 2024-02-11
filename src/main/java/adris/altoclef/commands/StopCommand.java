@@ -7,7 +7,7 @@ import adris.altoclef.commandsystem.Command;
 public class StopCommand extends Command {
 
     public StopCommand() {
-        super("stop", "Stop task runner (stops all automation)");
+        super("stop", "停止所有的运行及任务");
     }
 
     @Override

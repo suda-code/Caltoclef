@@ -7,7 +7,7 @@ import adris.altoclef.tasks.movement.IdleTask;
 
 public class IdleCommand extends Command {
     public IdleCommand() {
-        super("idle", "Stand still");
+        super("idle", "静止不动");
     }
 
     @Override

@@ -11,13 +11,13 @@ import java.util.Arrays;
 
 public class ListCommand extends Command {
     public ListCommand() {
-        super("list", "List all obtainable items");
+        super("list", "列出所有可获得的项目");
     }
 
     @Override
     protected void call(AltoClef mod, ArgParser parser) throws CommandException {
-        mod.log("#### LIST OF ALL OBTAINABLE ITEMS ####", MessagePriority.OPTIONAL);
+        mod.log("######### 所有可获得的物品 #########", MessagePriority.OPTIONAL);
         mod.log(Arrays.toString(TaskCatalogue.resourceNames().toArray()), MessagePriority.OPTIONAL);
-        mod.log("############# END LIST ###############", MessagePriority.OPTIONAL);
+        mod.log("############# 结束 ###############", MessagePriority.OPTIONAL);
     }
 }

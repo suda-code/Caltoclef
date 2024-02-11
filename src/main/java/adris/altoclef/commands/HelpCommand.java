@@ -8,12 +8,12 @@ import adris.altoclef.ui.MessagePriority;
 public class HelpCommand extends Command {
 
     public HelpCommand() {
-        super("help", "Lists all commands");
+        super("help", "列出所有指令");
     }
 
     @Override
     protected void call(AltoClef mod, ArgParser parser) {
-        mod.log("########## HELP: ##########", MessagePriority.OPTIONAL);
+        mod.log("########## 帮助: ##########", MessagePriority.OPTIONAL);
         int padSize = 10;
         for (Command c : mod.getCommandExecutor().allCommands()) {
             StringBuilder line = new StringBuilder();
