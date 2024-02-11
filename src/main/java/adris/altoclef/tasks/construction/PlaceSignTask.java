@@ -92,7 +92,7 @@ public class PlaceSignTask extends Task {
                 }
                 lines++;
                 if (lines >= 4) {
-                    Debug.logWarning("Too much text to fit on sign! Got Cut off.");
+                    Debug.logWarning("标志上的文字太多！被切断了。");
                     break;
                 }
 
@@ -137,9 +137,9 @@ public class PlaceSignTask extends Task {
     @Override
     protected String toDebugString() {
         if (placeAnywhere()) {
-            return "Place Sign Anywhere";
+            return "随意放置告示牌";
         }
-        return "Place Sign at " + _target.toShortString();
+        return "放置告示牌在 " + _target.toShortString();
     }
 
     private boolean placeAnywhere() {

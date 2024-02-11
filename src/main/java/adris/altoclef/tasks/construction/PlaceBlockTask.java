@@ -71,14 +71,14 @@ public class PlaceBlockTask extends Task implements ITaskRequiresGrounded {
 
         // Perform timeout wander
         if (_wanderTask.isActive() && !_wanderTask.isFinished(mod)) {
-            setDebugState("Wandering.");
+            setDebugState("徘徊.");
             _progressChecker.reset();
             return _wanderTask;
         }
 
         if (_autoCollectStructureBlocks) {
             if (_materialTask != null && _materialTask.isActive() && !_materialTask.isFinished(mod)) {
-                setDebugState("No structure items, collecting cobblestone + dirt as default.");
+                setDebugState("没有结构物品，默认收集圆石+泥土。");
                 if (getMaterialCount(mod) < PREFERRED_MATERIALS) {
                     return _materialTask;
                 } else {
@@ -100,24 +100,24 @@ public class PlaceBlockTask extends Task implements ITaskRequiresGrounded {
         if (!_progressChecker.check(mod)) {
             _failCount++;
             if (!tryingAlternativeWay()) {
-                Debug.logMessage("Failed to place, wandering timeout.");
+                Debug.logMessage("放置失败，徘徊超时。");
                 return _wanderTask;
             } else {
-                Debug.logMessage("Trying alternative way of placing block...");
+                Debug.logMessage("尝试放置块的替代方法...");
             }
         }
 
 
         // Place block
         if (tryingAlternativeWay()) {
-            setDebugState("Alternative way: Trying to go above block to place block.");
+            setDebugState("替代方法：尝试走到方块上方放置方块。");
             return new GetToBlockTask(_target.up(), false);
         } else {
-            setDebugState("Letting baritone place a block.");
+            setDebugState("让BT放置一个方块。");
 
             // Perform baritone placement
             if (!mod.getClientBaritone().getBuilderProcess().isActive()) {
-                Debug.logInternal("Run Structure Build");
+                Debug.logInternal("运行结构构建");
                 ISchematic schematic = new PlaceStructureSchematic(mod);
                 mod.getClientBaritone().getBuilderProcess().build("structure", schematic, _target);
             }
@@ -153,7 +153,7 @@ public class PlaceBlockTask extends Task implements ITaskRequiresGrounded {
 
     @Override
     protected String toDebugString() {
-        return "Place structure" + ArrayUtils.toString(_toPlace) + " at " + _target.toShortString();
+        return "放置结构" + ArrayUtils.toString(_toPlace) + " 在 " + _target.toShortString();
     }
 
     private boolean tryingAlternativeWay() {
@@ -182,7 +182,7 @@ public class PlaceBlockTask extends Task implements ITaskRequiresGrounded {
                         return possible;
                     }
                 }
-                Debug.logInternal("Failed to find throwaway block");
+                Debug.logInternal("未能找到一次性块");
                 // No throwaways available!!
                 return new BlockOptionalMeta(Blocks.COBBLESTONE).getAnyBlockState();
             }

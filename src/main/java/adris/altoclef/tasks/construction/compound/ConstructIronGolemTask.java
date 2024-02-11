@@ -39,7 +39,7 @@ public class ConstructIronGolemTask extends Task {
     @Override
     protected Task onTick(AltoClef mod) {
         if (!StorageHelper.itemTargetsMetInventory(mod, golemMaterials(mod))) {
-            setDebugState("Getting materials for the iron golem");
+            setDebugState("获取铁傀儡的材料");
             return new CataloguedResourceTask(golemMaterials(mod));
         }
         if (_position == null) {
@@ -57,51 +57,51 @@ public class ConstructIronGolemTask extends Task {
         }
         if (!WorldHelper.isBlock(mod, _position, Blocks.IRON_BLOCK)) {
             if (!WorldHelper.isBlock(mod, _position, Blocks.AIR)) {
-                setDebugState("Destroying block in way of base iron block");
+                setDebugState("以基础铁块的方式摧毁方块");
                 return new DestroyBlockTask(_position);
             }
-            setDebugState("Placing the base iron block");
+            setDebugState("放置基础铁块");
             return new PlaceBlockTask(_position, Blocks.IRON_BLOCK);
         }
 //        mod.getPlayer().getServer().getPlayerManager().getPlayer("camelCasedSnivy").getAdvancementTracker()
         if (!WorldHelper.isBlock(mod, _position.up(), Blocks.IRON_BLOCK)) {
             if (!WorldHelper.isBlock(mod, _position.up(), Blocks.AIR)) {
-                setDebugState("Destroying block in way of center iron block");
+                setDebugState("摧毁中心铁块路径上的块");
                 return new DestroyBlockTask(_position.up());
             }
-            setDebugState("Placing the center iron block");
+            setDebugState("放置中心铁块");
             return new PlaceBlockTask(_position.up(), Blocks.IRON_BLOCK);
         }
         if (!WorldHelper.isBlock(mod, _position.up().east(), Blocks.IRON_BLOCK)) {
             if (!WorldHelper.isBlock(mod, _position.up().east(), Blocks.AIR)) {
-                setDebugState("Destroying block in way of east iron block");
+                setDebugState("摧毁东铁块路上的块");
                 return new DestroyBlockTask(_position.up().east());
             }
-            setDebugState("Placing the east iron block");
+            setDebugState("放置东铁块");
             return new PlaceBlockTask(_position.up().east(), Blocks.IRON_BLOCK);
         }
         if (!WorldHelper.isBlock(mod, _position.up().west(), Blocks.IRON_BLOCK)) {
             if (!WorldHelper.isBlock(mod, _position.up().west(), Blocks.AIR)) {
-                setDebugState("Destroying block in way of west iron block");
+                setDebugState("摧毁西铁块路上的块");
                 return new DestroyBlockTask(_position.up().west());
             }
-            setDebugState("Placing the west iron block");
+            setDebugState("放置西铁块");
             return new PlaceBlockTask(_position.up().west(), Blocks.IRON_BLOCK);
         }
         if (!WorldHelper.isBlock(mod, _position.east(), Blocks.AIR)) {
-            setDebugState("Clearing area on east side...");
+            setDebugState("东侧清理区域...");
             return new DestroyBlockTask(_position.east());
         }
         if (!WorldHelper.isBlock(mod, _position.west(), Blocks.AIR)) {
-            setDebugState("Clearing area on west side...");
+            setDebugState("西侧清理区域...");
             return new DestroyBlockTask(_position.west());
         }
         if (!WorldHelper.isBlock(mod, _position.up(2), Blocks.AIR)) {
-            setDebugState("Destroying block in way of pumpkin");
+            setDebugState("以南瓜的方式摧毁方块");
             return new DestroyBlockTask(_position.up(2));
         }
         _canBeFinished = true;
-        setDebugState("Placing the pumpkin (I think)");
+        setDebugState("放置南瓜（我认为）");
         return new PlaceBlockTask(_position.up(2), Blocks.CARVED_PUMPKIN);
     }
 
@@ -125,7 +125,7 @@ public class ConstructIronGolemTask extends Task {
 
     @Override
     protected String toDebugString() {
-        return "Construct Iron Golem";
+        return "建造铁傀儡";
     }
 
     private int ironBlocksNeeded(AltoClef mod) {

@@ -85,7 +85,7 @@ public class PlaceBlockNearbyTask extends Task {
         // Try placing where we're looking right now.
         BlockPos current = getCurrentlyLookingBlockPlace(mod);
         if (current != null && _canPlaceHere.test(current)) {
-            setDebugState("Placing since we can...");
+            setDebugState("既然我们可以放置...");
             if (mod.getSlotHandler().forceEquipItem(ItemHelper.blocksToItems(_toPlace))) {
                 if (place(mod, current)) {
                     return null;
@@ -95,13 +95,13 @@ public class PlaceBlockNearbyTask extends Task {
 
         // Wander while we can.
         if (_wander.isActive() && !_wander.isFinished(mod)) {
-            setDebugState("Wandering, will try to place again later.");
+            setDebugState("徘徊，稍后再尝试放置.");
             _progressChecker.reset();
             return _wander;
         }
         // Fail check
         if (!_progressChecker.check(mod)) {
-            Debug.logMessage("Failed placing, wandering and trying again.");
+            Debug.logMessage("放置失败，徘徊并重试.");
             LookHelper.randomOrientation(mod);
             if (_tryPlace != null) {
                 mod.getBlockTracker().requestBlockUnreachable(_tryPlace);
@@ -115,7 +115,7 @@ public class PlaceBlockNearbyTask extends Task {
             _tryPlace = locateClosePlacePos(mod);
         }
         if (_tryPlace != null) {
-            setDebugState("Trying to place at " + _tryPlace);
+            setDebugState("试图放置在 " + _tryPlace);
             _justPlaced = _tryPlace;
             return new PlaceBlockTask(_tryPlace, _toPlace);
         }
@@ -126,7 +126,7 @@ public class PlaceBlockNearbyTask extends Task {
             LookHelper.randomOrientation(mod);
         }
 
-        setDebugState("Wandering until we randomly place or find a good place spot.");
+        setDebugState("徘徊直到我们随机放置或找到一个好地方.");
         return new TimeoutWanderTask();
     }
 
@@ -146,7 +146,7 @@ public class PlaceBlockNearbyTask extends Task {
 
     @Override
     protected String toDebugString() {
-        return "Place " + Arrays.toString(_toPlace) + " nearby";
+        return "地方 " + Arrays.toString(_toPlace) + " 附近";
     }
 
     @Override

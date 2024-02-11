@@ -111,7 +111,7 @@ public class ConstructNetherPortalBucketTask extends Task {
     protected Task onTick(AltoClef mod) {
 
         if (_refreshTimer.elapsed()) {
-            Debug.logMessage("Duct tape: Refreshing inventory again just in case");
+            Debug.logMessage("管道胶带：再次刷新库存以防万一");
             _refreshTimer.reset();
             mod.getSlotHandler().refreshInventory();
         }
@@ -132,7 +132,7 @@ public class ConstructNetherPortalBucketTask extends Task {
 
 
         if (_wanderTask.isActive() && !_wanderTask.isFinished(mod)) {
-            setDebugState("Wandering before retrying...");
+            setDebugState("重试前徘徊...");
             _progressChecker.reset();
             return _wanderTask;
         }
@@ -141,7 +141,7 @@ public class ConstructNetherPortalBucketTask extends Task {
         // Get bucket if we don't have one.
         int bucketCount = mod.getItemStorage().getItemCount(Items.BUCKET, Items.LAVA_BUCKET, Items.WATER_BUCKET);
         if (bucketCount < 2) {
-            setDebugState("Getting buckets");
+            setDebugState("获取水桶");
             _progressChecker.reset();
             // If we have lava/water, get the inverse. Otherwise we dropped a bucket, just get a bucket.
             if (mod.getItemStorage().hasItem(Items.LAVA_BUCKET)) {
@@ -157,7 +157,7 @@ public class ConstructNetherPortalBucketTask extends Task {
 
         // Get flint & steel if we don't have one
         if (!mod.getItemStorage().hasItem(Items.FLINT_AND_STEEL) && !mod.getItemStorage().hasItem(Items.FIRE_CHARGE)) {
-            setDebugState("Getting flint & steel");
+            setDebugState("获取打火石和钢铁");
             _progressChecker.reset();
             return TaskCatalogue.getItemTask(Items.FLINT_AND_STEEL, 1);
         }
@@ -167,7 +167,7 @@ public class ConstructNetherPortalBucketTask extends Task {
             _progressChecker.reset();
             // Get water before searching, just for convenience.
             if (!mod.getItemStorage().hasItem(Items.WATER_BUCKET)) {
-                setDebugState("Getting water");
+                setDebugState("取水");
                 _progressChecker.reset();
                 return TaskCatalogue.getItemTask(Items.WATER_BUCKET, 1);
             }
@@ -177,24 +177,24 @@ public class ConstructNetherPortalBucketTask extends Task {
             if (_firstSearch || _lavaSearchTimer.elapsed()) {
                 _firstSearch = false;
                 _lavaSearchTimer.reset();
-                Debug.logMessage("(Searching for lava lake with portalable spot nearby...)");
+                Debug.logMessage("(寻找附近有传送点的熔岩湖...)");
                 BlockPos lavaPos = findLavaLake(mod, mod.getPlayer().getBlockPos());
                 if (lavaPos != null) {
                     // We have a lava lake, set our portal origin!
                     BlockPos foundPortalRegion = getPortalableRegion(mod, lavaPos, mod.getPlayer().getBlockPos(), new Vec3i(-1, 0, 0), PORTALABLE_REGION_SIZE, 20);
                     if (foundPortalRegion == null) {
-                        Debug.logWarning("Failed to find portalable region nearby. Consider increasing the search timeout range");
+                        Debug.logWarning("无法找到附近的可传送区域。考虑增加搜索超时范围");
                     } else {
                         _portalOrigin = foundPortalRegion.add(PORTAL_ORIGIN_RELATIVE_TO_REGION);
                         foundSpot = true;
                     }
                 } else {
-                    Debug.logMessage("(lava lake not found)");
+                    Debug.logMessage("(未找到熔岩湖)");
                 }
             }
 
             if (!foundSpot) {
-                setDebugState("(timeout: Looking for lava lake)");
+                setDebugState("(超时：寻找熔岩湖)");
                 return new TimeoutWanderTask(100);
             }
         }
@@ -207,7 +207,7 @@ public class ConstructNetherPortalBucketTask extends Task {
                 // Already satisfied, clear water above if need be.
                 BlockPos waterCheck = framePos.up();
                 if (mod.getWorld().getBlockState(waterCheck).getBlock() == Blocks.WATER && WorldHelper.isSourceBlock(mod, waterCheck, true)) {
-                    setDebugState("Clearing water from cast");
+                    setDebugState("清除铸件中的水");
                     return new ClearLiquidTask(waterCheck);
                 }
                 continue;
@@ -215,7 +215,7 @@ public class ConstructNetherPortalBucketTask extends Task {
 
             // Get lava early so placing it is faster
             if (!mod.getItemStorage().hasItem(Items.LAVA_BUCKET) && frameBlock != Blocks.LAVA) {
-                setDebugState("Collecting lava");
+                setDebugState("收集熔岩");
                 _progressChecker.reset();
                 return _collectLavaTask;
             }
@@ -230,14 +230,14 @@ public class ConstructNetherPortalBucketTask extends Task {
             BlockPos p = _portalOrigin.add(offs);
             assert MinecraftClient.getInstance().world != null;
             if (!MinecraftClient.getInstance().world.getBlockState(p).isAir()) {
-                setDebugState("Clearing inside of portal");
+                setDebugState("清理门户内部");
                 _currentDestroyTarget = p;
                 return null;
                 //return new DestroyBlockTask(p);
             }
         }
 
-        setDebugState("Flinting and Steeling");
+        setDebugState("燧石与钢铁");
 
         // Flint and steel it baby
         return new InteractWithBlockTask(new ItemTarget(new Item[]{Items.FLINT_AND_STEEL, Items.FIRE_CHARGE}, 1), Direction.UP, _portalOrigin.down(), true);
@@ -256,7 +256,7 @@ public class ConstructNetherPortalBucketTask extends Task {
 
     @Override
     protected String toDebugString() {
-        return "Construct Nether Portal";
+        return "建造下界传送门";
     }
 
     private BlockPos findLavaLake(AltoClef mod, BlockPos playerPos) {
@@ -270,7 +270,7 @@ public class ConstructNetherPortalBucketTask extends Task {
             if (sqDist < nearestSqDistance) {
                 int depth = getNumberOfBlocksAdjacent(alreadyExplored, pos);
                 if (depth != 0) {
-                    Debug.logMessage("Found with depth " + depth);
+                    Debug.logMessage("深度发现 " + depth);
                     if (depth >= 12) {
                         nearestSqDistance = sqDist;
                         nearestLake = pos;

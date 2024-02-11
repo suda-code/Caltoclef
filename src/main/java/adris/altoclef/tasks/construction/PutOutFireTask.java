@@ -52,6 +52,6 @@ public class PutOutFireTask extends Task {
 
     @Override
     protected String toDebugString() {
-        return "Putting out fire at " + _firePosition;
+        return "灭火于 " + _firePosition;
     }
 }

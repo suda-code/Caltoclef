@@ -117,7 +117,7 @@ public class ConstructNetherPortalObsidianTask extends Task {
 
         // Get obsidian if we don't have.
         if (mod.getItemStorage().getItemCount(Items.OBSIDIAN) < neededObsidian) {
-            setDebugState("Getting obsidian");
+            setDebugState("获取黑曜石");
             return TaskCatalogue.getItemTask(Items.OBSIDIAN, neededObsidian);
         }
 
@@ -125,22 +125,22 @@ public class ConstructNetherPortalObsidianTask extends Task {
         if (_origin == null) {
             if (_areaSearchTimer.elapsed()) {
                 _areaSearchTimer.reset();
-                Debug.logMessage("(Searching for area to build portal nearby...)");
+                Debug.logMessage("(正在寻找附近建立传送门的区域...)");
                 _origin = getBuildableAreaNearby(mod);
             }
-            setDebugState("Looking for portalable area...");
+            setDebugState("寻找传送门区域...");
             return new TimeoutWanderTask();
         }
 
         // Get flint and steel
         if (!mod.getItemStorage().hasItem(Items.FLINT_AND_STEEL)) {
-            setDebugState("Getting flint and steel");
+            setDebugState("获取打火石和钢铁");
             return TaskCatalogue.getItemTask(Items.FLINT_AND_STEEL, 1);
         }
 
         // Place frame
         if (placeTarget != null) {
-            setDebugState("Placing frame...");
+            setDebugState("放置框架...");
             return new PlaceBlockTask(placeTarget, Blocks.OBSIDIAN);
         }
 
@@ -172,6 +172,6 @@ public class ConstructNetherPortalObsidianTask extends Task {
 
     @Override
     protected String toDebugString() {
-        return "Building nether portal with obsidian";
+        return "用黑曜石建造地狱传送门";
     }
 }

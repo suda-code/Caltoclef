@@ -81,7 +81,7 @@ public class PlaceObsidianBucketTask extends Task {
 
         // Manual wander to try and make this godforesaken task work
         if (_wanderTask.isActive() && !_wanderTask.isFinished(mod)) {
-            setDebugState("Wandering.");
+            setDebugState("徘徊.");
             _progressChecker.reset();
             return _wanderTask;
         }
@@ -122,19 +122,19 @@ public class PlaceObsidianBucketTask extends Task {
         if (mod.getWorld().getBlockState(_pos).getBlock() != Blocks.LAVA) {
 
             if (WorldHelper.isSolid(mod, _pos)) {
-                setDebugState("Clearing space around lava");
+                setDebugState("清理熔岩周围的空间");
                 _currentDestroyTarget = _pos;
                 return null;
                 //return new DestroyBlockTask(framePos);
             }
             // Clear the upper two as well, to make placing more reliable.
             if (WorldHelper.isSolid(mod, _pos.up())) {
-                setDebugState("Clearing space around lava");
+                setDebugState("清理熔岩周围的空间");
                 _currentDestroyTarget = _pos.up();
                 return null;
             }
             if (WorldHelper.isSolid(mod, _pos.up(2))) {
-                setDebugState("Clearing space around lava");
+                setDebugState("清理熔岩周围的空间");
                 _currentDestroyTarget = _pos.up(2);
                 return null;
             }
@@ -149,18 +149,18 @@ public class PlaceObsidianBucketTask extends Task {
             // Would lead to an embarrassing death.
             BlockPos targetPos = _pos.add(-1, 1, 0);
             if (!mod.getPlayer().getBlockPos().equals(targetPos) && mod.getItemStorage().hasItem(Items.LAVA_BUCKET)) {
-                setDebugState("Positioning player before lava");
+                setDebugState("在熔岩前定位玩家");
                 return new GetToBlockTask(targetPos, false);
             }
 
-            setDebugState("Placing lava for cast");
+            setDebugState("放置熔岩用于铸造");
 
             return new InteractWithBlockTask(new ItemTarget(Items.LAVA_BUCKET, 1), Direction.WEST, _pos.add(1, 0, 0), false);
         }
         // Lava placed, Now, place water.
         BlockPos waterCheck = _pos.up();
         if (mod.getWorld().getBlockState(waterCheck).getBlock() != Blocks.WATER) {
-            setDebugState("Placing water for cast");
+            setDebugState("浇注水");
 
             if (WorldHelper.isSolid(mod, waterCheck)) {
                 _currentDestroyTarget = waterCheck;
@@ -177,7 +177,7 @@ public class PlaceObsidianBucketTask extends Task {
             // Get to position to avoid weird stuck scenario
             BlockPos targetPos = _pos.add(-1, 1, 0);
             if (!mod.getPlayer().getBlockPos().equals(targetPos) && mod.getItemStorage().hasItem(Items.WATER_BUCKET)) {
-                setDebugState("Positioning player before water");
+                setDebugState("将玩家定位在水前");
                 return new GetToBlockTask(targetPos, false);
             }
 
@@ -206,7 +206,7 @@ public class PlaceObsidianBucketTask extends Task {
 
     @Override
     protected String toDebugString() {
-        return "Placing obsidian at " + _pos + " with a cast";
+        return "将黑曜石放置在 " + _pos + " 带有强制转换";
     }
 
     public BlockPos getPos() {

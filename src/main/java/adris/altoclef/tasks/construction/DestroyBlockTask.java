@@ -144,6 +144,6 @@ public class DestroyBlockTask extends Task implements ITaskRequiresGrounded {
 
     @Override
     protected String toDebugString() {
-        return "Destroy block at " + _pos.toShortString();
+        return "摧毁方块 " + _pos.toShortString();
     }
 }

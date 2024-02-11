@@ -57,6 +57,6 @@ public class ClearLiquidTask extends Task {
 
     @Override
     protected String toDebugString() {
-        return "Clear liquid at " + _liquidPos;
+        return "清理液体在 " + _liquidPos;
     }
 }
